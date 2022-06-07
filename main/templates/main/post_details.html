@@ -1,0 +1,31 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/main.css' %}">
+    <title>Post Details</title>
+</head>
+<body>
+
+    <div class="image_details_box">
+         <img class="post_detail_image" src ='{{ post.image.url }}'/>
+
+        <h1 style="margin:10px 10px 10px 10px;">{{ object.title }}</h1>
+
+        <h2 style="margin:10px 10px 10px 10px;">{{ object.type }}</h2>
+
+        <h2 style="margin:10px 10px 10px 10px;">Price: {{ object.price }}</h2>
+
+
+        <a href="#" class="buy-btn" style="">Add to cart</a>
+
+    </div>
+
+
+</body>
+</html>
+{% endblock content %}

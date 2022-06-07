@@ -1,0 +1,110 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+
+        <html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--    <link rel="stylesheet" href="{% static 'main.css' %}">-->
+
+        <head>
+            <title>Website Ada</title>
+    <script>
+        var slideIndex = 1;
+
+        window.onload = function() {
+         showSlides(slideIndex);
+            document.getElementById("ssc").style.display="block"
+
+        }
+
+        // Next/previous controls
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
+
+        // Thumbnail image controls
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+          var i;
+          var slides = document.getElementsByClassName("my_slides");
+          var dots = document.getElementsByClassName("dot");
+          if (n > slides.length) {slideIndex = 1}
+          if (n < 1) {slideIndex = slides.length}
+          for (i = 0; i < slides.length; i++) {
+              slides[i].style.display = "none";
+          }
+          for (i = 0; i < dots.length; i++) {
+              dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block";
+          dots[slideIndex-1].className += " active";
+        }
+    </script>
+        </head>
+<!---------------- SLIDE CONTAINER ----------------->
+    <div id="ssc" class="slide-show-container">
+        <div class="my_slides fade">
+            <img src="{% static 'main/images/slide1.jpg' %}">
+            <img src="{% static 'main/images/slide2.jpg' %}">
+            <img src="{% static 'main/images/slide3.jpg' %}">
+        </div>
+
+        <div class="my_slides fade">
+            <img src="{% static 'main/images/slide4.jpg' %}">
+            <img src="{% static 'main/images/slide5.jpg' %}">
+            <img src="{% static 'main/images/slide6.jpg' %}">
+        </div>
+
+        <div class="my_slides fade">
+            <img src="{% static 'main/images/slide7.jpg' %}">
+            <img src="{% static 'main/images/slide8.jpg' %}">
+            <img src="{% static 'main/images/slide9.jpg' %}">
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+    </div>
+        <br>
+
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+        <div>
+        <div style="text-align:center"><q style="family-font:Questrial,sans-serif; font-size: 20px; color:rgba(0,104,113,255);">A beautiful body perishes, but a work of art dies not.</q></div>
+        <div style="color:rgba(0,0,0,.2); text-align:center;">-Leonardo da Vinci</div>
+        </div>
+
+        <br>
+        <hr class="first-hr">
+
+<ul id="gallery" class="gallery_class">
+        {% for post in posts %}
+        <li class="item">
+            <div class="box">
+            <div class="box-image">
+                <img src= '{{ post.image.url }}'>
+                <div class="overlay">
+                    <a href="{% url 'post-details' post.id %}" class="buy-btn">Order Now</a>
+                </div>
+            </div>
+            <div class="box-detail">
+                <div class ="type">
+                    <a href="#">{{post.title}}</a>
+                    <span>{{post.type}}</span>
+                </div>
+                    <span class="price">{{post.price}}</span>
+            </div>
+            </div></div>
+        </li>
+        {% endfor %}
+</ul>
+{% endblock content %}

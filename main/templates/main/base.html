@@ -1,0 +1,105 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/main.css' %}">
+
+    {% if title %}
+        <title>Django Blog - {{ title }}</title>
+    {% else %}
+        <title>Django Blog</title>
+    {% endif %}
+</head>
+<!---------------- NAVIGATION BAR ----------------->
+        {% if user.is_authenticated %}
+        <div class="top-right-nav">
+            <div class="login_button" style ="float:right; margin-right:10px; margin-top:15px;;">
+                <a class="login" href="#">
+                    <img src="{% static 'main/images/login.jpg' %}">
+                    Log Out
+                </a>
+                <a class="cart" href="#" >
+                    <img src="{% static 'main/images/shopping-cart.jpg' %}" alt="Cart logo" style="margin-right:-6px;">
+                    Cart
+                </a>
+            </div>
+            {% else %}
+                <div class="top-right-nav">
+        <div class="login_button" style ="float:right; margin-right:10px; margin-top:15px;;">
+            <a class="login" href="#">
+                <img src="{% static 'main/images/login.jpg' %}">
+                Log Out
+            </a>
+            <a class="cart" href="{#}" >
+                <img src="{% static 'main/images/shopping-cart.jpg' %}" alt="Cart logo" style="margin-right:-6px;">
+                Cart
+            </a>
+        </div>
+            {% endif %}
+            <div class="logo">
+            <a href="{% url 'website-home' %}"><span>Website Ada</span><img src="{% static 'main/images/logo.jpg' %}" alt="Paint brush logo"></a>
+            </div>
+            <nav class="top-nav">
+        <ul>
+        <li><a href="{% url 'website-home' %}">Home</a></li>
+        <li><a href="{% url 'website-about' %}">About</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#print">Prints</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact-us">Contact</a></li>
+        </ul>
+    </nav>
+        </div>
+
+{% block content %}
+{% endblock %}
+
+<!---------------------- REGISTER -------------------->
+{% block register %}
+{% endblock %}
+
+
+
+<!---------------------- LOGIN -------------------->
+{% block login %}
+{% endblock %}
+
+<!---------------------- LOGIN -------------------->
+{% block product_details %}
+{% endblock %}
+
+<!---------------------- CART -------------------->
+{% block cart %}
+{% endblock %}
+
+<br>
+<hr class="second-hr" style="margin-top:100px;">
+<br>
+
+
+<!---------------- CONTACT US ----------------->
+
+    <div class="contact-me-container" id="contact-us">
+        <form action="" method = "post">
+            {% csrf_token %}
+            {{ form }}
+            <span>Contact me</span><br>
+            <input type="text" id="fname" name="fullname" placeholder="Full Name">
+            <input type="email" id="email" name="email" placeholder="E-mail">
+            <input type="tel" id="phone"  name="phone" placeholder="Phone">
+            <textarea name="message" placeholder="Your Message"></textarea>
+            <input class="send-button" type="submit" value="Send">
+        </form>
+    </div>
+
+
+
+        </body>
+        </html>
